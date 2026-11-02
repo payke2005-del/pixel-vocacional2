@@ -1,0 +1,12 @@
+# Archivo de configuración con API Keys
+js/config.js
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Carpetas de dependencias
+node_modules/
+
+# Logs
+*.log
