@@ -195,6 +195,7 @@
                 <button id="btn-exportar-db" class="btn-secondary-action" style="background-color: #2563eb; color: white; border-color: #1e40af; margin-top: 10px;">
                     📊 DESCARGAR DICCIONARIO DE DATOS
                 </button>
+                <button id="btn-play-minigame" class="btn-secondary-action" style="background-color: #8b5cf6; color: white; border-color: #7c3aed;">🎮 MINIJUEGO: ATRAPA EL BUG</button>
 
                 <!-- BOTONES NUEVOS DE BACKUP Y RESTORE -->
                 <div style="display: flex; gap: 10px; margin-top: 10px;">
@@ -333,6 +334,23 @@
             <button id="btn-finish-report" class="btn-main-action" data-i18n="backMenuBtn">VOLVER AL PANEL</button>
         </section>
 
+        <!-- MINIJUEGO: ATRAPA EL BUG -->
+        <section id="screen-minigame" class="view-box hidden">
+            <h1>🐛 ATRAPA EL BUG</h1>
+            <p class="view-description">Haz clic en los bichos (🐛) y evita los archivos (📁).</p>
+            <div class="minigame-header">
+                <div class="indicator-box">Tiempo: <span id="minigame-timer">20</span>s</div>
+                <div class="indicator-box">Puntos: <span id="minigame-score">0</span></div>
+            </div>
+            <div id="minigame-area" class="minigame-area"></div>
+            <div id="minigame-end-message" class="hidden" style="text-align:center; margin-top:20px;">
+                <h2>¡Juego Terminado!</h2>
+                <p>Puntaje final: <span id="final-score">0</span></p>
+            </div>
+            <button id="btn-start-minigame" class="btn-main">INICIAR JUEGO</button>
+            <button id="btn-exit-minigame" class="btn-secondary-action" style="margin-top: 15px;">VOLVER AL PANEL</button>
+        </section>
+
     </main>
 
     <div id="achievement-toast-container" class="achievement-toast-container"></div>
@@ -349,6 +367,7 @@
     <script src="js/exportar.js"></script> <!-- SCRIPT DE EXPORTACIÓN Y BACKUP -->
     <script src="js/app.js"></script>
     <script src="js/chatbot.js"></script>
+    <script src="js/minijuego.js"></script>
     <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {

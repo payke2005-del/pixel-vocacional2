@@ -1149,3 +1149,35 @@ h3 { font-size: 1.1rem; color: var(--accent-orange); }
         padding: 15px;
     }
 }
+
+/* ============================================================
+   MINIJUEGO: ATRAPA EL BUG
+   ============================================================ */
+.minigame-area {
+    width: 100%;
+    height: 300px;
+    background: var(--bg-primary);
+    border: 3px solid var(--accent-red);
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    margin-top: 15px;
+}
+.minigame-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.minigame-item {
+    position: absolute;
+    font-size: 2rem;
+    cursor: pointer;
+    user-select: none;
+    transition: transform 0.1s;
+}
+.minigame-item:hover {
+    transform: scale(1.2);
+}
+.minigame-item.bug { color: #ff4444; }
+.minigame-item.file { color: #00cc66; }
+.minigame-item.error { color: #ff0000; font-weight: bold; }

@@ -999,6 +999,14 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('🎉 Pixel Vocacional instalada como aplicación');
   });
 
+  // --- MINIJUEGO: ATRAPA EL BUG ---
+  document.getElementById('btn-play-minigame').addEventListener('click', () => {
+      showView('screen-minigame');
+  });
+  document.getElementById('btn-exit-minigame').addEventListener('click', () => {
+      showView('screen-config');
+  });
+
   // --- INICIALIZACIÓN ---
   showView('screen-welcome');
   translateUI();
