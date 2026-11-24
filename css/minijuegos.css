@@ -1,0 +1,533 @@
+/* ============================================================
+   MINIJUEGOS UNIVERSITARIOS - ESTILOS CONTENIDOS
+   Prefijo "mj-" para evitar colisiones con CSS global.
+   ============================================================ */
+
+/* ---------- Contenedor base de cualquier minijuego ---------- */
+.mj-container {
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #1f2937;
+  background: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto 20px auto;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.mj-container h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+  color: #111827;
+  text-align: center;
+}
+.mj-container p {
+  margin: 0 0 12px 0;
+  font-size: 0.95rem;
+  color: #4b5563;
+  text-align: center;
+}
+
+/* ---------- Explicaciones didácticas ---------- */
+.mj-bgh-explicacion,
+.mj-bg-explicacion,
+.mj-cg-explicacion,
+.mj-gg-explicacion,
+.mj-sg-explicacion {
+  background: #eff6ff;
+  border-left: 4px solid #2563eb;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #1e3a8a;
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+/* ---------- Barra de estado (tiempo / puntaje) ---------- */
+.mj-status {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  background: #f3f4f6;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #111827;
+}
+.mj-status .mj-tag {
+  color: #2563eb;
+}
+
+/* ---------- Botones ---------- */
+.mj-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.mj-btn:hover {
+  background: #1d4ed8;
+}
+.mj-btn:active {
+  transform: translateY(1px);
+}
+.mj-btn.secondary {
+  background: #6b7280;
+}
+.mj-btn.secondary:hover {
+  background: #4b5563;
+}
+.mj-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- Mensajes / feedback ---------- */
+.mj-msg {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+  display: none;
+}
+.mj-msg.ok {
+  display: block;
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+.mj-msg.err {
+  display: block;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+.mj-msg.warn {
+  display: block;
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+
+/* ---------- Pistas didácticas ---------- */
+.mj-bgh-pista,
+.mj-bg-pista,
+.mj-cg-pista,
+.mj-gg-pista {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  text-align: center;
+}
+.mj-bgh-pista.info, .mj-bg-pista.info, .mj-cg-pista.info, .mj-gg-pista.info {
+  background: #eff6ff;
+  color: #1e3a8a;
+  border: 1px solid #bfdbfe;
+}
+.mj-bgh-pista.warn, .mj-bg-pista.warn, .mj-cg-pista.warn, .mj-gg-pista.warn {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+.mj-bgh-pista.ok, .mj-bg-pista.ok, .mj-cg-pista.ok, .mj-gg-pista.ok {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+/* ============================================================
+   1. BUG HUNTER (Informática)
+   ============================================================ */
+.mj-bgh-code {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: #1e293b;
+  border-radius: 8px;
+  padding: 12px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  max-height: 260px;
+  overflow-y: auto;
+}
+.mj-bgh-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  user-select: none;
+}
+.mj-bgh-line:hover {
+  background: rgba(255,255,255,0.08);
+}
+.mj-bgh-line .mj-bgh-lineno {
+  width: 24px;
+  text-align: right;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  user-select: none;
+}
+.mj-bgh-line .mj-bgh-content {
+  flex: 1;
+  color: #e2e8f0;
+}
+.mj-bgh-line.found {
+  background: #22c55e !important;
+  color: #fff;
+}
+.mj-bgh-line.wrong {
+  background: #ef4444 !important;
+  color: #fff;
+  animation: mj-shake 0.4s;
+}
+@keyframes mj-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* ============================================================
+   2. BALANCE PERFECTO (Contaduría)
+   ============================================================ */
+.mj-balanza-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 16px 0;
+}
+.mj-balanza {
+  font-size: 3rem;
+  transition: transform 0.3s;
+}
+.mj-balanza.equilibrada {
+  animation: mj-pulse 1s infinite;
+}
+@keyframes mj-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+.mj-balanza-texto {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.mj-bg-columns {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.mj-bg-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 220px;
+  padding: 14px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 10px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.mj-bg-col:hover {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+.mj-bg-col.debe { border-color: #ef4444; background: #fef2f2; }
+.mj-bg-col.haber { border-color: #22c55e; background: #f0fdf4; }
+.mj-bg-col h4 {
+  margin: 0 0 8px 0;
+  text-align: center;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.mj-bg-col.debe h4 { color: #dc2626; }
+.mj-bg-col.haber h4 { color: #16a34a; }
+.mj-bg-sum {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  text-align: center;
+  color: #6b7280;
+  font-weight: 600;
+}
+.mj-bg-dropzone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 80px;
+}
+
+/* Tarjetas */
+.mj-bg-card {
+  padding: 10px 12px;
+  border: 2px solid #94a3b8;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  text-align: center;
+  user-select: none;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  transition: border 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+.mj-bg-card:hover {
+  border-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.mj-bg-card.seleccionada {
+  border-color: #2563eb;
+  background: #dbeafe;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
+}
+.mj-bg-card.colocada {
+  cursor: default;
+  opacity: 0.9;
+}
+.mj-bg-card.colocada.debe {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+.mj-bg-card.colocada.haber {
+  border-color: #22c55e;
+  background: #f0fdf4;
+}
+.mj-bg-card .mj-bg-icon {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 4px;
+}
+.mj-bg-card .monto {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-top: 4px;
+}
+.mj-bg-mazo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+/* ============================================================
+   3. COMPLETA EL CIRCUITO (Electricidad)
+   ============================================================ */
+.mj-cg-grid {
+  display: grid;
+  gap: 4px;
+  margin: 16px 0;
+  justify-content: center;
+  touch-action: manipulation;
+}
+.mj-cg-cell {
+  width: 70px;
+  height: 70px;
+  border: 2px solid #94a3b8;
+  border-radius: 8px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.1s, box-shadow 0.2s, border-color 0.2s;
+}
+.mj-cg-cell:hover {
+  border-color: #2563eb;
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
+}
+.mj-cg-cell:active { transform: scale(0.92); }
+.mj-cg-cell.source { background: #fef3c7; border-color: #d97706; font-weight: 700; }
+.mj-cg-cell.target { background: #dbeafe; border-color: #2563eb; font-weight: 700; }
+.mj-cg-cell.wire { border-style: solid; }
+.mj-cg-cell.lit {
+  box-shadow: 0 0 14px rgba(16,185,129,0.6);
+  border-color: #10b981;
+}
+
+/* ============================================================
+   4. RELACIÓN DE ENGRANAJES (Mecánica)
+   ============================================================ */
+.mj-gg-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 18px 0;
+  flex-wrap: wrap;
+}
+.mj-gg-gear {
+  width: 90px;
+  height: 90px;
+  border: 4px solid #64748b;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #334155;
+  user-select: none;
+}
+.mj-gg-gear .mj-gg-teeth {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.mj-gg-gear.motor { border-color: #2563eb; color: #2563eb; background: #dbeafe; }
+.mj-gg-gear.output { border-color: #dc2626; color: #dc2626; background: #fee2e2; }
+.mj-gg-arrow {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 0.7rem;
+  color: #64748b;
+  font-weight: 700;
+}
+.mj-gg-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+.mj-gg-control {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mj-gg-control label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+.mj-gg-control select {
+  padding: 8px 10px;
+  border: 2px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.mj-gg-control select:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+.mj-gg-target {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+  color: #111827;
+}
+
+/* ============================================================
+   5. AJUSTE DE SEÑAL (Telecomunicaciones)
+   ============================================================ */
+.mj-sg-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+.mj-sg-canvas-wrap {
+  width: 100%;
+  max-width: 560px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f8fafc;
+  overflow: hidden;
+}
+.mj-sg-canvas {
+  display: block;
+  width: 100%;
+  height: 200px;
+  background: #fff;
+}
+.mj-sg-precision-wrap {
+  width: 100%;
+  max-width: 520px;
+}
+.mj-sg-precision-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 6px;
+  text-align: center;
+}
+.mj-sg-precision-bar {
+  width: 100%;
+  height: 12px;
+  background: #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.mj-sg-precision-fill {
+  height: 100%;
+  width: 0%;
+  background: #ef4444;
+  border-radius: 6px;
+  transition: width 0.3s, background 0.3s;
+}
+.mj-sg-sliders {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  max-width: 520px;
+}
+.mj-sg-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mj-sg-slider label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+.mj-sg-slider input[type=range] {
+  width: 100%;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+.mj-sg-val {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .mj-container { padding: 14px; margin: 0 10px 20px 10px; }
+  .mj-bg-columns { flex-direction: column; }
+  .mj-cg-cell { width: 56px; height: 56px; font-size: 1.2rem; }
+  .mj-sg-sliders { grid-template-columns: 1fr; }
+}

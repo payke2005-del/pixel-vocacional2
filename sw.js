@@ -21,6 +21,8 @@ const urlsToCache = [
   './js/achievements.js',
   './js/app.js',
   './js/chatbot.js',
+  './js/minijuegos.js',
+  './css/minijuegos.css',
   './manifest.json'
 ];
 

@@ -1,5 +1,5 @@
 // ==========================================================================
-// MOTOR LÓGICO CENTRAL - PIXEL VOCACIONAL SPA
+// MOTOR LÓGICO CENTRAL - PIXEL VOCACIONAL SPA (CORREGIDO)
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -50,6 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let timerInterval = null;
   let timeLeft = 30;
   const TOTAL_QUESTIONS = 11;
+
+  // Control del minijuego modular activo
+  let juegoActivo = null;
 
   // Control de racha (para logros) y tiempo de partida
   let currentStreak = 0;
@@ -248,6 +251,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- NAVEGACIÓN ---
   function showView(viewId) {
+    const currentView = document.querySelector('.view-box:not(.hidden)');
+    if (currentView && currentView.id === 'screen-minigames' && juegoActivo) {
+      juegoActivo.destroy();
+      juegoActivo = null;
+    }
+
     document.querySelectorAll('.view-box').forEach(v => v.classList.add('hidden'));
     const target = document.getElementById(viewId);
     if (target) target.classList.remove('hidden');
@@ -279,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!visibleView) return;
     const id = visibleView.id;
 
-    if (id === 'screen-sheets' || id === 'screen-report' || id === 'screen-ranking' || id === 'screen-achievements') {
+    if (id === 'screen-sheets' || id === 'screen-report' || id === 'screen-ranking' || id === 'screen-achievements' || id === 'screen-minigames') {
       showView('screen-config');
       renderProgressPanel();
     } else if (id === 'screen-config') {
@@ -1000,11 +1009,136 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- MINIJUEGO: ATRAPA EL BUG ---
-  document.getElementById('btn-play-minigame').addEventListener('click', () => {
+  const btnPlayMinigame = document.getElementById('btn-play-minigame');
+  if (btnPlayMinigame) {
+    btnPlayMinigame.addEventListener('click', () => {
       showView('screen-minigame');
-  });
-  document.getElementById('btn-exit-minigame').addEventListener('click', () => {
+    });
+  }
+  const btnExitMinigame = document.getElementById('btn-exit-minigame');
+  if (btnExitMinigame) {
+    btnExitMinigame.addEventListener('click', () => {
       showView('screen-config');
+    });
+  }
+
+  // ============================================================================
+  // MINIJUEGOS MODULARES POR CARRERA (CORREGIDO)
+  // ============================================================================
+
+  // Mapeo de tipo de minijuego a clase
+  const CLASES_MINIJUEGOS = {
+    bug: BugHunterGame,
+    balance: BalanceGame,
+    circuito: CircuitGame,
+    engranajes: GearGame,
+    senal: SignalGame
+  };
+
+  // Mapeo de tipo de minijuego a área (carrera)
+  const AREA_POR_TIPO = {
+    bug: 'informatica',
+    balance: 'contaduria',
+    circuito: 'electricidad',
+    engranajes: 'mecanica',
+    senal: 'telecomunicaciones'
+  };
+
+  // Inicia un minijuego modular dentro del contenedor de la pantalla screen-minigames
+  function iniciarMinijuego(tipo) {
+    if (juegoActivo) {
+      juegoActivo.destroy();
+      juegoActivo = null;
+    }
+
+    const contenedor = document.getElementById('minijuego-container');
+    const resultadoEl = document.getElementById('minigame-resultado');
+    if (!contenedor) return;
+
+    contenedor.innerHTML = '';
+    resultadoEl.style.display = 'none';
+    resultadoEl.textContent = '';
+
+    const ClaseJuego = CLASES_MINIJUEGOS[tipo];
+    if (!ClaseJuego) {
+      console.error(`Minijuego desconocido: ${tipo}`);
+      resultadoEl.className = 'mj-msg err';
+      resultadoEl.textContent = '⚠ Minijuego no disponible.';
+      resultadoEl.style.display = 'block';
+      return;
+    }
+
+    juegoActivo = new ClaseJuego();
+    const area = AREA_POR_TIPO[tipo];
+    const user = currentUser || 'Invitado';
+
+    juegoActivo.start(contenedor, (result) => {
+      const { success, score, timeSpent } = result;
+
+      resultadoEl.className = 'mj-msg ' + (success ? 'ok' : 'err');
+      resultadoEl.textContent = success
+        ? `🎉 ¡Éxito! Puntaje: ${score} (${timeSpent.toFixed(2)} s)`
+        : `⚠ No se completó. Puntaje: ${score} (${timeSpent.toFixed(2)} s)`;
+      resultadoEl.style.display = 'block';
+
+      if (typeof SoundSystem !== 'undefined') {
+        SoundSystem.play(success ? 'correct' : 'wrong');
+      }
+
+      if (typeof ProgressSystem !== 'undefined') {
+        try {
+          ProgressSystem.saveGame({ [area]: score }, score, [area]);
+        } catch (e) {
+          console.warn('Error guardando progreso:', e);
+        }
+      }
+
+      if (typeof RankingSystem !== 'undefined') {
+        try {
+          RankingSystem.saveScore(user, area, score);
+        } catch (e) {
+          console.warn('Error guardando ranking:', e);
+        }
+      }
+
+      if (success && typeof AchievementsSystem !== 'undefined') {
+        try {
+          if (area === 'informatica' && score >= 100) {
+            AchievementsSystem.unlock('informatico_pro');
+          }
+        } catch (e) {
+          console.warn('Error desbloqueando logro:', e);
+        }
+      }
+    });
+  }
+
+  // Listener: abrir menú de minijuegos desde el panel de configuración
+  const btnViewMinigames = document.getElementById('btn-view-minigames');
+  if (btnViewMinigames) {
+    btnViewMinigames.addEventListener('click', () => {
+      if (typeof SoundSystem !== 'undefined') SoundSystem.play('click');
+      showView('screen-minigames');
+    });
+  }
+
+  // Listener: volver al panel desde el menú de minijuegos
+  const btnVolverMinigames = document.getElementById('btn-volver-minigames');
+  if (btnVolverMinigames) {
+    btnVolverMinigames.addEventListener('click', () => {
+      if (typeof SoundSystem !== 'undefined') SoundSystem.play('click');
+      showView('screen-config');
+    });
+  }
+
+  // Conectar los 5 botones de selección de carrera (clase correcta: .btn-minigame)
+  const btnsMinijuego = document.querySelectorAll('.btn-minigame[data-tipo]');
+  btnsMinijuego.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tipo = btn.dataset.tipo;
+      if (typeof SoundSystem !== 'undefined') SoundSystem.play('click');
+      iniciarMinijuego(tipo);
+    });
   });
 
   // --- INICIALIZACIÓN ---

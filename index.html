@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Orientación Vocacional - UPTA</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/minijuegos.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#cc0000">
     <meta name="mobile-web-app-capable" content="yes">
@@ -196,6 +197,7 @@
                     📊 DESCARGAR DICCIONARIO DE DATOS
                 </button>
                 <button id="btn-play-minigame" class="btn-secondary-action" style="background-color: #8b5cf6; color: white; border-color: #7c3aed;">🎮 MINIJUEGO: ATRAPA EL BUG</button>
+                <button id="btn-view-minigames" class="btn-secondary-action" style="background-color: #7c3aed; color: white; border-color: #5b21b6;">🎮 MINIJUEGOS POR CARRERA</button>
 
                 <!-- BOTONES NUEVOS DE BACKUP Y RESTORE -->
                 <div style="display: flex; gap: 10px; margin-top: 10px;">
@@ -351,6 +353,32 @@
             <button id="btn-exit-minigame" class="btn-secondary-action" style="margin-top: 15px;">VOLVER AL PANEL</button>
         </section>
 
+        <!-- MINIJUEGOS POR CARRERA -->
+        <section id="screen-minigames" class="view-box hidden">
+            <h1>🎮 MINIJUEGOS VOCACIONALES</h1>
+            <p class="view-description">Selecciona una carrera y pon a prueba tus habilidades técnicas.</p>
+            <div class="minigames-grid" id="minigames-grid">
+                <button id="btn-minigame-bug" class="btn-minigame" data-tipo="bug" aria-label="Caza de Bugs - Informática">
+                    🐛 Caza de Bugs <span class="mini-sub">(Informática)</span>
+                </button>
+                <button id="btn-minigame-balance" class="btn-minigame" data-tipo="balance" aria-label="Balance Perfecto - Contaduría">
+                    ⚖ Balance Perfecto <span class="mini-sub">(Contaduría)</span>
+                </button>
+                <button id="btn-minigame-circuito" class="btn-minigame" data-tipo="circuito" aria-label="Completa el Circuito - Electricidad">
+                    🔌 Completa el Circuito <span class="mini-sub">(Electricidad)</span>
+                </button>
+                <button id="btn-minigame-engranajes" class="btn-minigame" data-tipo="engranajes" aria-label="Relación de Engranajes - Mecánica">
+                    ⚙ Relación de Engranajes <span class="mini-sub">(Mecánica)</span>
+                </button>
+                <button id="btn-minigame-senal" class="btn-minigame" data-tipo="senal" aria-label="Ajuste de Señal - Telecomunicaciones">
+                    📡 Ajuste de Señal <span class="mini-sub">(Telecomunicaciones)</span>
+                </button>
+            </div>
+            <div id="minijuego-container"></div>
+            <div id="minigame-resultado" class="mj-msg" style="margin-top: 15px; text-align: center; display: none;"></div>
+            <button id="btn-volver-minigames" class="btn-main-action" style="margin-top: 20px;">⬅ VOLVER AL PANEL</button>
+        </section>
+
     </main>
 
     <div id="achievement-toast-container" class="achievement-toast-container"></div>
@@ -364,7 +392,8 @@
     <script src="js/sounds.js"></script>
     <script src="js/share.js"></script>
     <script src="js/achievements.js"></script>
-    <script src="js/exportar.js"></script> <!-- SCRIPT DE EXPORTACIÓN Y BACKUP -->
+    <script src="js/exportar.js"></script>
+    <script src="js/minijuegos.js"></script>  <!-- NUEVO: debe ir antes de app.js -->
     <script src="js/app.js"></script>
     <script src="js/chatbot.js"></script>
     <script src="js/minijuego.js"></script>

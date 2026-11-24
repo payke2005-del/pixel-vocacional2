@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo - Minijuegos Modulares</title>
+  <link rel="stylesheet" href="css/minijuegos.css">
+</head>
+<body style="padding:20px; font-family:sans-serif; background:#f8fafc;">
+  <h1>Minijuegos Modulares - Trivia Universitaria</h1>
+  <p>Haz clic en cualquier juego para probarlo. Cada uno renderiza su propia interfaz dentro del contenedor.</p>
+
+  <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
+    <button onclick="iniciar('bug')" class="mj-btn">🐛 Caza de Bugs (Info)</button>
+    <button onclick="iniciar('balance')" class="mj-btn">⚖ Balance Perfecto (Conta)</button>
+    <button onclick="iniciar('circuito')" class="mj-btn">🔌 Completa el Circuito (Elec)</button>
+    <button onclick="iniciar('engranajes')" class="mj-btn">⚙ Relación de Engranajes (Mec)</button>
+    <button onclick="iniciar('senal')" class="mj-btn">📡 Ajuste de Señal (Telecom)</button>
+    <button onclick="detener()" class="mj-btn secondary">⏹ Detener juego actual</button>
+  </div>
+
+  <div id="contenedor-juego" style="max-width:640px; margin:0 auto;"></div>
+  <div id="resultado" style="margin-top:20px; padding:16px; border-radius:8px; background:#fff; border:1px solid #e5e7eb; display:none;">
+    <h3>Resultado del juego</h3>
+    <p id="resultado-texto"></p>
+  </div>
+
+  <script src="js/minijuegos.js"></script>
+  <script>
+    let juegoActivo = null;
+
+    function iniciar(tipo) {
+      detener();
+      const contenedor = document.getElementById('contenedor-juego');
+      contenedor.innerHTML = '';
+      document.getElementById('resultado').style.display = 'none';
+
+      switch (tipo) {
+        case 'bug':
+          juegoActivo = new BugHunterGame();
+          break;
+        case 'balance':
+          juegoActivo = new BalanceGame();
+          break;
+        case 'circuito':
+          juegoActivo = new CircuitGame();
+          break;
+        case 'engranajes':
+          juegoActivo = new GearGame();
+          break;
+        case 'senal':
+          juegoActivo = new SignalGame();
+          break;
+      }
+
+      juegoActivo.start(contenedor, (result) => {
+        mostrarResultado(result);
+        juegoActivo = null;
+      });
+    }
+
+    function detener() {
+      if (juegoActivo) {
+        juegoActivo.destroy();
+        juegoActivo = null;
+      }
+      document.getElementById('contenedor-juego').innerHTML = '';
+    }
+
+    function mostrarResultado(r) {
+      const box = document.getElementById('resultado');
+      const texto = document.getElementById('resultado-texto');
+      box.style.display = 'block';
+      box.className = r.success ? 'mj-msg ok' : 'mj-msg err';
+      texto.innerHTML = `
+        <strong>Éxito:</strong> ${r.success}<br>
+        <strong>Puntaje:</strong> ${r.score}<br>
+        <strong>Tiempo:</strong> ${r.timeSpent} s
+      `;
+    }
+  </script>
+</body>
+</html>
