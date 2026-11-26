@@ -1,5 +1,5 @@
 // ==========================================================================
-// MOTOR LÓGICO CENTRAL - PIXEL VOCACIONAL SPA (CORREGIDO)
+// MOTOR LÓGICO CENTRAL - PIXEL VOCACIONAL SPA (CON MINIJUEGOS POR NIVEL)
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1023,10 +1023,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ============================================================================
-  // MINIJUEGOS MODULARES POR CARRERA (CORREGIDO)
+  // MINIJUEGOS MODULARES POR CARRERA (CON SELECCIÓN DE NIVEL)
   // ============================================================================
 
-  // Mapeo de tipo de minijuego a clase
   const CLASES_MINIJUEGOS = {
     bug: BugHunterGame,
     balance: BalanceGame,
@@ -1035,7 +1034,6 @@ document.addEventListener('DOMContentLoaded', () => {
     senal: SignalGame
   };
 
-  // Mapeo de tipo de minijuego a área (carrera)
   const AREA_POR_TIPO = {
     bug: 'informatica',
     balance: 'contaduria',
@@ -1044,7 +1042,6 @@ document.addEventListener('DOMContentLoaded', () => {
     senal: 'telecomunicaciones'
   };
 
-  // Inicia un minijuego modular dentro del contenedor de la pantalla screen-minigames
   function iniciarMinijuego(tipo) {
     if (juegoActivo) {
       juegoActivo.destroy();
@@ -1059,9 +1056,34 @@ document.addEventListener('DOMContentLoaded', () => {
     resultadoEl.style.display = 'none';
     resultadoEl.textContent = '';
 
+    // Pantalla de selección de nivel
+    const nivelWrap = document.createElement('div');
+    nivelWrap.className = 'mj-nivel-selector';
+    nivelWrap.innerHTML = `
+      <h3>Selecciona la dificultad</h3>
+      <div class="mj-nivel-botones">
+        <button class="mj-nivel-btn principiante" data-nivel="principiante">🟢 Principiante</button>
+        <button class="mj-nivel-btn intermedio" data-nivel="intermedio">🟡 Intermedio</button>
+        <button class="mj-nivel-btn experto" data-nivel="experto">🔴 Experto</button>
+      </div>
+    `;
+    contenedor.appendChild(nivelWrap);
+
+    nivelWrap.querySelectorAll('.mj-nivel-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const nivel = btn.dataset.nivel;
+        if (typeof SoundSystem !== 'undefined') SoundSystem.play('click');
+        contenedor.innerHTML = '';
+        lanzarJuego(tipo, nivel);
+      });
+    });
+  }
+
+  function lanzarJuego(tipo, nivel) {
+    const contenedor = document.getElementById('minijuego-container');
+    const resultadoEl = document.getElementById('minigame-resultado');
     const ClaseJuego = CLASES_MINIJUEGOS[tipo];
     if (!ClaseJuego) {
-      console.error(`Minijuego desconocido: ${tipo}`);
       resultadoEl.className = 'mj-msg err';
       resultadoEl.textContent = '⚠ Minijuego no disponible.';
       resultadoEl.style.display = 'block';
@@ -1075,10 +1097,16 @@ document.addEventListener('DOMContentLoaded', () => {
     juegoActivo.start(contenedor, (result) => {
       const { success, score, timeSpent } = result;
 
+      let multiplicador = 1.0;
+      if (nivel === 'principiante') multiplicador = 0.5;
+      else if (nivel === 'intermedio') multiplicador = 0.75;
+
+      const scoreFinal = parseFloat((score * multiplicador).toFixed(2));
+
       resultadoEl.className = 'mj-msg ' + (success ? 'ok' : 'err');
       resultadoEl.textContent = success
-        ? `🎉 ¡Éxito! Puntaje: ${score} (${timeSpent.toFixed(2)} s)`
-        : `⚠ No se completó. Puntaje: ${score} (${timeSpent.toFixed(2)} s)`;
+        ? `🎉 ¡Éxito! Puntaje: ${scoreFinal} (${timeSpent.toFixed(2)} s)`
+        : `⚠ No se completó. Puntaje: ${scoreFinal} (${timeSpent.toFixed(2)} s)`;
       resultadoEl.style.display = 'block';
 
       if (typeof SoundSystem !== 'undefined') {
@@ -1087,7 +1115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (typeof ProgressSystem !== 'undefined') {
         try {
-          ProgressSystem.saveGame({ [area]: score }, score, [area]);
+          ProgressSystem.saveGame({ [area]: scoreFinal }, scoreFinal, [area]);
         } catch (e) {
           console.warn('Error guardando progreso:', e);
         }
@@ -1095,7 +1123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (typeof RankingSystem !== 'undefined') {
         try {
-          RankingSystem.saveScore(user, area, score);
+          RankingSystem.saveScore(user, area, scoreFinal);
         } catch (e) {
           console.warn('Error guardando ranking:', e);
         }
@@ -1103,17 +1131,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (success && typeof AchievementsSystem !== 'undefined') {
         try {
-          if (area === 'informatica' && score >= 100) {
+          if (area === 'informatica' && scoreFinal >= 100) {
             AchievementsSystem.unlock('informatico_pro');
           }
         } catch (e) {
           console.warn('Error desbloqueando logro:', e);
         }
       }
-    });
+    }, nivel);
   }
 
-  // Listener: abrir menú de minijuegos desde el panel de configuración
   const btnViewMinigames = document.getElementById('btn-view-minigames');
   if (btnViewMinigames) {
     btnViewMinigames.addEventListener('click', () => {
@@ -1122,7 +1149,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Listener: volver al panel desde el menú de minijuegos
   const btnVolverMinigames = document.getElementById('btn-volver-minigames');
   if (btnVolverMinigames) {
     btnVolverMinigames.addEventListener('click', () => {
@@ -1131,7 +1157,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Conectar los 5 botones de selección de carrera (clase correcta: .btn-minigame)
   const btnsMinijuego = document.querySelectorAll('.btn-minigame[data-tipo]');
   btnsMinijuego.forEach(btn => {
     btn.addEventListener('click', () => {
