@@ -1,66 +1,64 @@
 /* ============================================================
-   MINIJUEGOS UNIVERSITARIOS - ESTILOS CONTENIDOS
-   Prefijo "mj-" para evitar colisiones con CSS global.
+   MINIJUEGOS UNIVERSITARIOS - ESTILOS (DISEÑO OSCURO PROFESIONAL)
    ============================================================ */
 
-/* ---------- Contenedor base de cualquier minijuego ---------- */
+/* ---------- Contenedor base ---------- */
 .mj-container {
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  color: #1f2937;
-  background: #ffffff;
-  border: 2px solid #e5e7eb;
+  color: #e0e0e0;
+  background: #1e1e2f;
+  border: 3px solid #4a4a6a;
   border-radius: 12px;
   padding: 20px;
   box-sizing: border-box;
   width: 100%;
   max-width: 640px;
   margin: 0 auto 20px auto;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  position: relative;
 }
 .mj-container h2 {
   margin-top: 0;
-  font-size: 1.25rem;
-  color: #111827;
+  font-size: 1.3rem;
+  color: #c0c0e0;
   text-align: center;
+  letter-spacing: 1px;
 }
 .mj-container p {
   margin: 0 0 12px 0;
   font-size: 0.95rem;
-  color: #4b5563;
+  color: #a0a0b0;
   text-align: center;
 }
 
-/* ---------- Explicaciones didácticas ---------- */
-.mj-bgh-explicacion,
-.mj-bg-explicacion,
-.mj-cg-explicacion,
-.mj-gg-explicacion,
-.mj-sg-explicacion {
-  background: #eff6ff;
-  border-left: 4px solid #2563eb;
+/* ---------- Explicaciones ---------- */
+.mj-explicacion {
+  background: #2a2a3f;
+  border-left: 4px solid #6a6a8a;
   padding: 10px 14px;
   border-radius: 6px;
   font-size: 0.9rem;
-  color: #1e3a8a;
+  color: #b0b0c0;
   text-align: left;
   margin-bottom: 16px;
 }
 
-/* ---------- Barra de estado (tiempo / puntaje) ---------- */
+/* ---------- Barra de estado ---------- */
 .mj-status {
   display: flex;
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 16px;
   padding: 10px 14px;
-  background: #f3f4f6;
+  background: #2a2a3f;
+  border: 2px solid #4a4a6a;
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 700;
-  color: #111827;
+  color: #e0e0e0;
 }
 .mj-status .mj-tag {
-  color: #2563eb;
+  color: #88aaff;
 }
 
 /* ---------- Botones ---------- */
@@ -69,33 +67,39 @@
   width: 100%;
   padding: 12px 16px;
   margin-top: 12px;
-  border: none;
+  border: 2px solid #4a4a6a;
   border-radius: 8px;
-  background: #2563eb;
-  color: #fff;
-  font-size: 0.95rem;
-  font-weight: 600;
+  background: #2a2a3f;
+  color: #c0c0e0;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  transition: all 0.2s;
 }
 .mj-btn:hover {
-  background: #1d4ed8;
+  background: #3a3a5f;
+  color: #ffffff;
+  border-color: #6a6a8a;
 }
 .mj-btn:active {
   transform: translateY(1px);
 }
-.mj-btn.secondary {
-  background: #6b7280;
+.mj-btn.secundario {
+  border-color: #6a6a8a;
+  color: #a0a0b0;
 }
-.mj-btn.secondary:hover {
-  background: #4b5563;
+.mj-btn.secundario:hover {
+  background: #3a3a5f;
+  color: #ffffff;
 }
 .mj-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
-/* ---------- Mensajes / feedback ---------- */
+/* ---------- Mensajes ---------- */
 .mj-msg {
   margin-top: 12px;
   padding: 10px 14px;
@@ -103,51 +107,49 @@
   font-size: 0.9rem;
   text-align: center;
   display: none;
+  font-weight: 700;
 }
 .mj-msg.ok {
   display: block;
-  background: #dcfce7;
-  color: #166534;
-  border: 1px solid #86efac;
+  background: #1e3a1e;
+  color: #88cc88;
+  border: 2px solid #2e5a2e;
 }
 .mj-msg.err {
   display: block;
-  background: #fee2e2;
-  color: #991b1b;
-  border: 1px solid #fca5a5;
+  background: #3a1e1e;
+  color: #cc8888;
+  border: 2px solid #5a2e2e;
 }
 .mj-msg.warn {
   display: block;
-  background: #fef3c7;
-  color: #92400e;
-  border: 1px solid #fcd34d;
+  background: #3a3a1e;
+  color: #cccc88;
+  border: 2px solid #5a5a2e;
 }
 
-/* ---------- Pistas didácticas ---------- */
-.mj-bgh-pista,
-.mj-bg-pista,
-.mj-cg-pista,
-.mj-gg-pista {
+/* ---------- Pistas ---------- */
+.mj-pista {
   margin-top: 10px;
   padding: 8px 12px;
   border-radius: 6px;
   font-size: 0.85rem;
   text-align: center;
 }
-.mj-bgh-pista.info, .mj-bg-pista.info, .mj-cg-pista.info, .mj-gg-pista.info {
-  background: #eff6ff;
-  color: #1e3a8a;
-  border: 1px solid #bfdbfe;
+.mj-pista.info {
+  background: #2a2a3f;
+  color: #a0a0b0;
+  border: 1px solid #4a4a6a;
 }
-.mj-bgh-pista.warn, .mj-bg-pista.warn, .mj-cg-pista.warn, .mj-gg-pista.warn {
-  background: #fef3c7;
-  color: #92400e;
-  border: 1px solid #fcd34d;
+.mj-pista.warn {
+  background: #3a3a1e;
+  color: #cccc88;
+  border: 1px solid #5a5a2e;
 }
-.mj-bgh-pista.ok, .mj-bg-pista.ok, .mj-cg-pista.ok, .mj-gg-pista.ok {
-  background: #dcfce7;
-  color: #166534;
-  border: 1px solid #86efac;
+.mj-pista.ok {
+  background: #1e3a1e;
+  color: #88cc88;
+  border: 1px solid #2e5a2e;
 }
 
 /* ============================================================
@@ -157,7 +159,8 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  background: #1e293b;
+  background: #1a1a2a;
+  border: 2px solid #4a4a6a;
   border-radius: 8px;
   padding: 12px;
   font-family: 'Courier New', Courier, monospace;
@@ -178,26 +181,26 @@
   user-select: none;
 }
 .mj-bgh-line:hover {
-  background: rgba(255,255,255,0.08);
+  background: #2a2a3f;
 }
 .mj-bgh-line .mj-bgh-lineno {
   width: 24px;
   text-align: right;
   font-size: 0.75rem;
-  color: #94a3b8;
+  color: #6a6a8a;
   user-select: none;
 }
 .mj-bgh-line .mj-bgh-content {
   flex: 1;
-  color: #e2e8f0;
+  color: #c0c0e0;
 }
 .mj-bgh-line.found {
-  background: #22c55e !important;
-  color: #fff;
+  background: #1e3a1e !important;
+  border-left: 4px solid #88cc88;
 }
 .mj-bgh-line.wrong {
-  background: #ef4444 !important;
-  color: #fff;
+  background: #3a1e1e !important;
+  border-left: 4px solid #cc8888;
   animation: mj-shake 0.4s;
 }
 @keyframes mj-shake {
@@ -216,7 +219,7 @@
   margin: 16px 0;
 }
 .mj-balanza {
-  font-size: 3rem;
+  font-size: 4rem;
   transition: transform 0.3s;
 }
 .mj-balanza.equilibrada {
@@ -229,7 +232,7 @@
 .mj-balanza-texto {
   font-size: 0.9rem;
   font-weight: 700;
-  color: #6b7280;
+  color: #a0a0b0;
   margin-top: 4px;
 }
 
@@ -245,18 +248,18 @@
   gap: 8px;
   min-height: 220px;
   padding: 14px;
-  border: 2px dashed #cbd5e1;
+  border: 2px dashed #4a4a6a;
   border-radius: 10px;
-  background: #f8fafc;
+  background: #2a2a3f;
   cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
+  transition: all 0.2s;
 }
 .mj-bg-col:hover {
-  border-color: #2563eb;
-  background: #eff6ff;
+  border-color: #6a6a8a;
+  background: #3a3a5f;
 }
-.mj-bg-col.debe { border-color: #ef4444; background: #fef2f2; }
-.mj-bg-col.haber { border-color: #22c55e; background: #f0fdf4; }
+.mj-bg-col.debe { border-color: #8a4a4a; }
+.mj-bg-col.haber { border-color: #4a8a4a; }
 .mj-bg-col h4 {
   margin: 0 0 8px 0;
   text-align: center;
@@ -264,13 +267,13 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-.mj-bg-col.debe h4 { color: #dc2626; }
-.mj-bg-col.haber h4 { color: #16a34a; }
+.mj-bg-col.debe h4 { color: #cc8888; }
+.mj-bg-col.haber h4 { color: #88cc88; }
 .mj-bg-sum {
   margin-top: 8px;
   font-size: 0.8rem;
   text-align: center;
-  color: #6b7280;
+  color: #a0a0b0;
   font-weight: 600;
 }
 .mj-bg-dropzone {
@@ -284,38 +287,36 @@
 /* Tarjetas */
 .mj-bg-card {
   padding: 10px 12px;
-  border: 2px solid #94a3b8;
+  border: 2px solid #4a4a6a;
   border-radius: 8px;
-  background: #fff;
+  background: #1e1e2f;
   cursor: pointer;
   font-size: 0.85rem;
   text-align: center;
   user-select: none;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
-  transition: border 0.2s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  transition: all 0.2s;
 }
 .mj-bg-card:hover {
-  border-color: #2563eb;
+  border-color: #6a6a8a;
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 .mj-bg-card.seleccionada {
-  border-color: #2563eb;
-  background: #dbeafe;
+  border-color: #88aaff;
+  background: #2a2a4f;
   transform: scale(1.05);
-  box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
 }
 .mj-bg-card.colocada {
   cursor: default;
   opacity: 0.9;
 }
 .mj-bg-card.colocada.debe {
-  border-color: #ef4444;
-  background: #fef2f2;
+  border-color: #8a4a4a;
+  background: #3a1e1e;
 }
 .mj-bg-card.colocada.haber {
-  border-color: #22c55e;
-  background: #f0fdf4;
+  border-color: #4a8a4a;
+  background: #1e3a1e;
 }
 .mj-bg-card .mj-bg-icon {
   font-size: 1.5rem;
@@ -326,6 +327,7 @@
   font-weight: 700;
   font-size: 1rem;
   margin-top: 4px;
+  color: #cccc88;
 }
 .mj-bg-mazo {
   display: flex;
@@ -336,7 +338,7 @@
 }
 
 /* ============================================================
-   3. COMPLETA EL CIRCUITO (Electricidad)
+   3. CIRCUITO (Electricidad)
    ============================================================ */
 .mj-cg-grid {
   display: grid;
@@ -344,37 +346,268 @@
   margin: 16px 0;
   justify-content: center;
   touch-action: manipulation;
+  background: #1a1a2a;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #4a4a6a;
 }
 .mj-cg-cell {
   width: 70px;
   height: 70px;
-  border: 2px solid #94a3b8;
+  border: 2px solid #4a4a6a;
   border-radius: 8px;
-  background: #fff;
+  background: #1e1e2f;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.6rem;
   cursor: pointer;
   user-select: none;
-  transition: transform 0.1s, box-shadow 0.2s, border-color 0.2s;
+  transition: all 0.1s;
+  color: #c0c0e0;
 }
 .mj-cg-cell:hover {
-  border-color: #2563eb;
-  box-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
+  background: #2a2a3f;
 }
 .mj-cg-cell:active { transform: scale(0.92); }
-.mj-cg-cell.source { background: #fef3c7; border-color: #d97706; font-weight: 700; }
-.mj-cg-cell.target { background: #dbeafe; border-color: #2563eb; font-weight: 700; }
-.mj-cg-cell.wire { border-style: solid; }
+.mj-cg-cell.source { background: #2a2a1e; border-color: #8a8a4a; font-weight: 700; }
+.mj-cg-cell.target { background: #1e2a3a; border-color: #4a6a8a; font-weight: 700; }
 .mj-cg-cell.lit {
-  box-shadow: 0 0 14px rgba(16,185,129,0.6);
-  border-color: #10b981;
+  box-shadow: 0 0 15px rgba(136, 204, 136, 0.6);
+  border-color: #88cc88;
+}
+
+/* Implementos (Intermedio) */
+.mj-cg-implementos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+}
+.mj-cg-implemento {
+  padding: 10px 15px;
+  background: #2a2a3f;
+  border: 2px solid #4a4a6a;
+  border-radius: 8px;
+  color: #c0c0e0;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.mj-cg-implemento:hover {
+  background: #3a3a5f;
+}
+.mj-cg-implemento.correcto {
+  border-color: #4a8a4a;
+  background: #1e3a1e;
+  color: #88cc88;
+}
+.mj-cg-implemento.incorrecto {
+  border-color: #8a4a4a;
+  background: #3a1e1e;
+  color: #cc8888;
+  animation: mj-shake 0.4s;
+}
+.mj-cg-paso {
+  padding: 10px 15px;
+  background: #2a2a3f;
+  border: 2px solid #4a4a6a;
+  border-radius: 8px;
+  color: #c0c0e0;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.mj-cg-paso:hover {
+  background: #3a3a5f;
+}
+.mj-cg-paso.correcto {
+  border-color: #4a8a4a;
+  background: #1e3a1e;
+  color: #88cc88;
+}
+.mj-cg-paso.incorrecto {
+  border-color: #8a4a4a;
+  background: #3a1e1e;
+  color: #cc8888;
+  animation: mj-shake 0.4s;
+}
+
+/* Cables y tomacorrientes (Principiante) */
+.mj-cg-tomacorrientes {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+.mj-cg-tomacorriente {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #4a4a6a;
+  border-radius: 10px;
+  font-size: 2rem;
+  transition: all 0.2s;
+}
+.mj-cg-tomacorriente.dragover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(136, 170, 255, 0.5);
+}
+.mj-cg-tomacorriente.correcto {
+  border-color: #4a8a4a;
+  background: #1e3a1e;
+}
+.mj-cg-tomacorriente.incorrecto {
+  border-color: #8a4a4a;
+  background: #3a1e1e;
+  animation: mj-shake 0.4s;
+}
+.mj-cg-cables {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.mj-cg-cable {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: grab;
+  user-select: none;
+  transition: all 0.2s;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  border: 2px solid #4a4a6a;
+}
+.mj-cg-cable:hover {
+  transform: translateY(-3px);
+}
+.mj-cg-cable.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
 }
 
 /* ============================================================
-   4. RELACIÓN DE ENGRANAJES (Mecánica)
+   4. MECÁNICA
    ============================================================ */
+/* Ensambla la Máquina (Principiante) */
+.mj-gg-maquina {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+  padding: 15px;
+  background: #1a1a2a;
+  border: 3px dashed #4a4a6a;
+  border-radius: 10px;
+  min-height: 150px;
+}
+.mj-gg-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  background: #1e1e2f;
+  border: 3px solid #4a4a6a;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #6a6a8a;
+  transition: all 0.2s;
+}
+.mj-gg-slot.dragover {
+  border-color: #88aaff;
+  background: #2a2a4f;
+  transform: scale(1.05);
+}
+.mj-gg-slot.correcto {
+  border-color: #4a8a4a;
+  background: #1e3a1e;
+  color: #88cc88;
+}
+.mj-gg-slot.incorrecto {
+  border-color: #8a4a4a;
+  background: #3a1e1e;
+  animation: mj-shake 0.4s;
+}
+.mj-gg-slot-content {
+  font-size: 1.2rem;
+  text-align: center;
+}
+.mj-gg-mazo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+  padding: 15px;
+  background: #1a1a2a;
+  border: 2px solid #4a4a6a;
+  border-radius: 10px;
+}
+.mj-gg-pieza {
+  padding: 10px 15px;
+  background: #2a2a3f;
+  border: 3px solid #6a6a8a;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #c0c0e0;
+  cursor: grab;
+  user-select: none;
+  transition: all 0.2s;
+}
+.mj-gg-pieza:hover {
+  transform: translateY(-3px);
+  border-color: #88aaff;
+}
+.mj-gg-pieza.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+}
+
+/* Balanza de Peso (Intermedio) */
+.mj-gg-balanza-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+.mj-gg-balanza {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.mj-gg-plato {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #2a2a3f;
+  border: 3px solid #4a4a6a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #c0c0e0;
+}
+.mj-gg-balanza-emoji {
+  font-size: 4rem;
+  transition: transform 0.3s;
+}
+.mj-gg-pesos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+/* Engranajes (Experto) */
 .mj-gg-diagram {
   display: flex;
   align-items: center;
@@ -386,29 +619,29 @@
 .mj-gg-gear {
   width: 90px;
   height: 90px;
-  border: 4px solid #64748b;
+  border: 4px solid #6a6a8a;
   border-radius: 50%;
-  background: #f1f5f9;
+  background: #2a2a3f;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 0.7rem;
   font-weight: 700;
-  color: #334155;
+  color: #c0c0e0;
   user-select: none;
 }
 .mj-gg-gear .mj-gg-teeth {
   font-size: 1.5rem;
   line-height: 1;
 }
-.mj-gg-gear.motor { border-color: #2563eb; color: #2563eb; background: #dbeafe; }
-.mj-gg-gear.output { border-color: #dc2626; color: #dc2626; background: #fee2e2; }
+.mj-gg-gear.motor { border-color: #4a6a8a; color: #88aaff; }
+.mj-gg-gear.output { border-color: #8a4a4a; color: #cc8888; }
 .mj-gg-arrow {
   writing-mode: vertical-rl;
   text-orientation: mixed;
   font-size: 0.7rem;
-  color: #64748b;
+  color: #6a6a8a;
   font-weight: 700;
 }
 .mj-gg-controls {
@@ -425,18 +658,19 @@
 .mj-gg-control label {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #4b5563;
+  color: #a0a0b0;
 }
 .mj-gg-control select {
   padding: 8px 10px;
-  border: 2px solid #cbd5e1;
+  border: 2px solid #4a4a6a;
   border-radius: 6px;
-  background: #fff;
+  background: #1e1e2f;
+  color: #c0c0e0;
   font-size: 0.9rem;
   cursor: pointer;
 }
 .mj-gg-control select:focus {
-  border-color: #2563eb;
+  border-color: #88aaff;
   outline: none;
 }
 .mj-gg-target {
@@ -444,11 +678,11 @@
   font-size: 0.95rem;
   font-weight: 700;
   text-align: center;
-  color: #111827;
+  color: #cccc88;
 }
 
 /* ============================================================
-   5. AJUSTE DE SEÑAL (Telecomunicaciones)
+   5. TELECOMUNICACIONES
    ============================================================ */
 .mj-sg-wrap {
   display: flex;
@@ -459,41 +693,16 @@
 .mj-sg-canvas-wrap {
   width: 100%;
   max-width: 560px;
-  border: 2px solid #e5e7eb;
+  border: 2px solid #4a4a6a;
   border-radius: 10px;
-  background: #f8fafc;
+  background: #0a0a15;
   overflow: hidden;
 }
 .mj-sg-canvas {
   display: block;
   width: 100%;
   height: 200px;
-  background: #fff;
-}
-.mj-sg-precision-wrap {
-  width: 100%;
-  max-width: 520px;
-}
-.mj-sg-precision-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #4b5563;
-  margin-bottom: 6px;
-  text-align: center;
-}
-.mj-sg-precision-bar {
-  width: 100%;
-  height: 12px;
-  background: #e5e7eb;
-  border-radius: 6px;
-  overflow: hidden;
-}
-.mj-sg-precision-fill {
-  height: 100%;
-  width: 0%;
-  background: #ef4444;
-  border-radius: 6px;
-  transition: width 0.3s, background 0.3s;
+  background: #0a0a15;
 }
 .mj-sg-sliders {
   display: grid;
@@ -510,22 +719,22 @@
 .mj-sg-slider label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #4b5563;
+  color: #a0a0b0;
 }
 .mj-sg-slider input[type=range] {
   width: 100%;
-  accent-color: #2563eb;
+  accent-color: #88aaff;
   cursor: pointer;
 }
 .mj-sg-val {
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.85rem;
   font-weight: 700;
-  color: #2563eb;
+  color: #cccc88;
 }
 
 /* ============================================================
-   SELECTOR DE NIVEL
+   SELECTOR DE NIVEL Y TARJETAS DE CARRERA (Mejoras de tamaño)
    ============================================================ */
 .mj-nivel-selector {
   text-align: center;
@@ -533,26 +742,27 @@
 }
 .mj-nivel-selector h3 {
   font-family: 'Press Start 2P', monospace;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #fff;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   text-shadow: 2px 2px 0 #000;
 }
 .mj-nivel-botones {
   display: flex;
-  gap: 15px;
+  gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
 }
 .mj-nivel-btn {
-  padding: 15px 25px;
+  padding: 20px 35px;
   font-family: 'Press Start 2P', monospace;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   border: 3px solid #000;
   box-shadow: 4px 4px 0 #000;
   cursor: pointer;
   transition: 0.1s;
   color: #fff;
+  text-transform: uppercase;
 }
 .mj-nivel-btn:hover {
   transform: translate(2px, 2px);
@@ -561,16 +771,62 @@
 .mj-nivel-btn.principiante {
   background: #22c55e;
   border-color: #16a34a;
+  box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
 }
 .mj-nivel-btn.intermedio {
   background: #eab308;
   border-color: #ca8a04;
   color: #000;
+  box-shadow: 0 0 15px rgba(234, 179, 8, 0.5);
 }
 .mj-nivel-btn.experto {
   background: #ef4444;
   border-color: #dc2626;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
 }
+
+/* Tarjetas de selección de carrera (más grandes) */
+.minigames-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+.btn-minigame {
+  background: #2a2a3f;
+  border: 4px solid #4a4a6a;
+  border-radius: 12px;
+  padding: 30px 20px;
+  color: #c0c0e0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+.btn-minigame:hover {
+  transform: translateY(-5px);
+  border-color: #88aaff;
+  box-shadow: 0 8px 20px rgba(136, 170, 255, 0.3);
+}
+.btn-minigame .mini-sub {
+  font-size: 0.9rem;
+  color: #a0a0b0;
+  font-weight: 400;
+}
+.btn-minigame::before {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+.btn-minigame[data-tipo="bug"]::before { content: '🐛'; }
+.btn-minigame[data-tipo="balance"]::before { content: '⚖'; }
+.btn-minigame[data-tipo="circuito"]::before { content: '🔌'; }
+.btn-minigame[data-tipo="engranajes"]::before { content: '⚙'; }
+.btn-minigame[data-tipo="senal"]::before { content: '📡'; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 480px) {
@@ -580,4 +836,6 @@
   .mj-sg-sliders { grid-template-columns: 1fr; }
   .mj-nivel-botones { flex-direction: column; }
   .mj-nivel-btn { width: 100%; }
+  .mj-gg-maquina { grid-template-columns: 1fr; }
+  .mj-cg-tomacorrientes { flex-direction: column; align-items: center; }
 }
